@@ -1,0 +1,32 @@
+#!/bin/bash
+set -ex
+cd ${WORKSPACE}
+echo ${WORKSPACE}
+
+cat << EOF > "${WORKSPACE}/hosts"
+[target]
+#10.40.24.120 ansible_user=root
+#-rnp old 10.40.17.121 ansible_user=root
+#10.40.24.10 ansible_user=root #-rnp new
+10.40.24.131 ansible_user=root #-rnp new should be centos 8
+
+EOF
+
+if [ -d "${WORKSPACE}/helloPlayBk" ]; then
+    rm -rf "${WORKSPACE}/helloPlayBk"
+fi
+
+
+git clone https://github.com/scornp/helloPlayBk.git 
+
+ANSIBLE_CONFIG="${WORKSPACE}/helloPlayBk/ansible.cfg" 
+
+cd "${WORKSPACE}/helloPlayBk"
+
+echo `pwd`
+
+ansible-playbook build_helloworld.yml -i "${WORKSPACE}/hosts"
+#exit 0
+
+#ssh-agent -k 
+
