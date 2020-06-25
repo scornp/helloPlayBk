@@ -1,21 +1,13 @@
 build_id: "43"
 user: "dummy"
-become: yes
-become_user: "{{ user }}"
-dummyuser: "{{ user }}"
-become_method: su
-become_flags: "-s /bin/bash"
 
+#dummyuser: "{{ user }}"
 
-onednn_prefix:    "{{ '/opt/ohpc/pub/libs/gnu8/mkl-dnn' if use_openhpc == true e
-lse '/usr/local/mkl-dnn' }}"
-package_root_dir: "/home/builder/{{ build_id }}"
 version:          "master"
 pkgname:          "helloworld"
 repo_name:        "helloworld"
-onednn_base_dir:  "{{ package_root_dir }}/{{ pkgname }}/{{ version }}"
 gitUrl:           "https://github.com/scornp"
-onednn_prefix:    "/usr/local"
+onednn_prefix:    "/usr/local/mkl-dnn"
 onednn:
        arch_opt_flags: ""
        build_type: "DEBUG"
